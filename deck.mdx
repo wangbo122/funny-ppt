@@ -3,90 +3,983 @@ import {
   CodeSurferColumns,
   Step,
 } from "code-surfer";
-import { github, vsDark } from "@code-surfer/themes";
+import { github, vsDark, base, dracula, duotoneDark, duotoneLight, nightOwl, oceanicNext, shadesOfPurple, ultramin } from "@code-surfer/themes";
 
-export const theme = vsDark;
+export const themes = [nightOwl, oceanicNext];
 
-# 圆的碰撞 💥
+# 2D碰撞检测 💥
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
+<CodeSurferColumns themes={themes}>
 
 <Step>
 
   ```js
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-
-    <body>
-    </body>
-
-    </html>
+    if(ball.left < 0 || ball.right  > rect.width){
+      ball.velocityX = -ball.velocityX
+    }
+    if(ball.top  < 0 || ball.bottom > rect.height){
+      ball.velocityY = -ball.velocityY
+    }
+    // 当球碰到边框就反弹(如x/y轴方向速度取反)。
   ```
-
-  <img src="https://vr1.6rooms.com/tao/i/y5/e01e10f180da274b800c4b57f2f936b7.jpg" width="700px"/>
-
-</Step>
-
-<Step>
 
   ```js
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-
-            #boll1 {
-                width: 200px;
-                height: 200px;
-                background: red;
-                border-radius: 50%;
-                position: absolute;
-                left: 700px;
-                top: 100px;
-            }
-
-            #boll2 {
-                width: 100px;
-                height: 100px;
-                background: blue;
-                border-radius: 50%;
-                position: absolute;
-                left: 100px;
-                top: 270px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <div id="boll1"></div>
-        <div id="boll2"></div>
-    </body>
-
-    </html>
+    一些场景，只要我们约定好限定条件，就能实现我们想要的碰撞，如碰壁反弹
   ```
 
-  <img src="https://vr1.6rooms.com/tao/i/c7/c1f6528561e961d45eaf03428ec1db48.png" width="700px"/>
 
 </Step>
 
 </CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+    if(ball.left < 0 || ball.right  > rect.width){
+      ball.velocityX = -ball.velocityX
+    }
+    if(ball.top  < 0 || ball.bottom > rect.height){
+      ball.velocityY = -ball.velocityY
+    }
+    // 当球碰到边框就反弹(如x/y轴方向速度取反)。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/1.gif" width="700px"/>
+  </>
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+    if(
+      people.left == 100 && 
+      people.top + people.height > stone.height
+    ){
+      // 碰到石头
+    }
+  ```
+
+  ```js
+    再例如当一个人走到 100px 位置时不进行跳跃，就会碰到石头等等。
+  ```
+
+</Step>
+
+<Step>
+
+  ```js
+    if(
+      people.left == 100 && 
+      people.top + people.height > stone.height
+    ){
+      // 碰到石头
+    }
+  ```
+
+  ```js
+    再例如当一个人走到 100px 位置时不进行跳跃，就会碰到石头等等。
+
+    所以说，在某些场景只需通过设定到适当的参数即可实现碰撞检测。
+  ```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+## 规则图形之间的碰撞
+
+---
+
+<img src="http://82.156.167.84:7001/blog/ppt2/1.png" width="700px"/>
+
+---
+
+<img src="http://82.156.167.84:7001/blog/ppt2/2.png" width="700px"/>
+
+---
+
+<img src="http://82.156.167.84:7001/blog/ppt2/3.png" width="700px"/>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+                        矩形碰撞
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/4.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                 矩形碰撞
+
+    判断两个（无旋转）矩形是否碰撞，
+    就是看两个矩形的任意一边是否无间距。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/4.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+    rect1.x < rect2.x + rect2.width && 
+    rect1.x + rect1.width > rect2.x && 
+    rect1.y < rect2.y + rect2.height && 
+    rect1.height + rect1.y > rect2.y
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/4.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+                        圆形碰撞
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/29.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                        圆形碰撞
+
+    判断两个圆形的圆心是否小于两圆半径之和，小于的话就是碰撞
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/28.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+    Math.sqrt(
+      Math.pow(circleA.x - circleB.x, 2) +
+      Math.pow(circleA.y - circleB.y, 2)
+    ) < circleA.radius + circleB.radius
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/27.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+                        圆形与矩形（无旋转）
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/30.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                        圆形与矩形（无旋转）
+
+    找出矩形上离圆心最近的点，然后通过判断该点与圆心的距离是否小于圆的半径，
+    若小于则为碰撞。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/6.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                        圆形与矩形（无旋转）
+    找出矩形上离圆心最近的点，然后通过判断该点与圆心的距离是否小于圆的半径，
+    若小于则为碰撞。
+    如何找出矩形上离圆心最近的点呢？
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/6.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+    思考🤔：圆和矩形有几种位置情况的组合
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/6.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+    思考🤔：圆和矩形有几种位置情况的组合
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/10.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+    思考🤔：圆和矩形有几种位置情况的组合
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/11.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+    下面我们从 x 轴、y 轴两个方向分别进行寻找。为了方便描述，我们先约定以下变量：
+
+    矩形上离圆心最近的点为变量：closestPoint = {x, y};
+    矩形 rect = {x, y, w, h};  // 左上角与宽高
+    圆形 circle = {x, y, r};  // 圆心与半径
+
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/7.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7
+    矩形上离圆心最近的点为变量：closestPoint = {x, y};
+    矩形 rect = {x, y, w, h};  // 左上角与宽高
+    圆形 circle = {x, y, r};  // 圆心与半径
+
+    if (circle.x < rect.x) {
+      closestPoint.x = rect.x 
+    }
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/7.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8,9
+    矩形上离圆心最近的点为变量：closestPoint = {x, y};
+    矩形 rect = {x, y, w, h};  // 左上角与宽高
+    圆形 circle = {x, y, r};  // 圆心与半径
+
+    if (circle.x < rect.x) {
+      closestPoint.x = rect.x 
+    } else if (circle.x > rect.x + rect.w) {
+      closestPoint.x = rect.x  + rect.w
+    } 
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/8.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8,9,10,11
+    矩形上离圆心最近的点为变量：closestPoint = {x, y};
+    矩形 rect = {x, y, w, h};  // 左上角与宽高
+    圆形 circle = {x, y, r};  // 圆心与半径
+
+    if (circle.x < rect.x) {
+      closestPoint.x = rect.x 
+    } else if (circle.x > rect.x + rect.w) {
+      closestPoint.x = rect.x  + rect.w
+    } else {
+      closestPoint.x = circle.x 
+    }
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/9.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+    // closestPoint.x
+    if (circle.x < rect.x) {
+      closestPoint.x = rect.x 
+    } else if (circle.x > rect.x + rect.w) {
+      closestPoint.x = rect.x  + rect.w
+    } else {
+      closestPoint.x = circle.x 
+    }
+
+    // closestPoint.y
+    if (circle.y < rect.y) {
+      closestPoint.y = rect.y 
+    } else if (circle.y < rect.y + rect.h) {
+      closestPoint.y = rect.y +rect.h
+    } else {
+      closestPoint.y = circle.y 
+    }
+
+  ```
+
+  ```js
+    通过上述方法即可找出矩形上离圆心最近的点了，
+
+    然后通过『两点之间的距离公式』得出『最近点』与『圆心』的距离，
+
+    最后将其与圆的半径相比，即可判断是否发生碰撞。
+  ```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns themes={themes}>
+
+<Step>
+
+  ```js
+                           矩形碰撞（以矩形中心为旋转轴）
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/12.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                矩形碰撞（以矩形中心为旋转轴）
+
+    即使矩形以其中心为旋转轴进行了旋转，
+    但是判断它与圆形是否发生碰撞的本质还是找出矩形上离圆心的最近点。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/12.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                矩形碰撞（以矩形中心为旋转轴）
+
+    即使矩形以其中心为旋转轴进行了旋转，
+    但是判断它与圆形是否发生碰撞的本质还是找出矩形上离圆心的最近点。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/13.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4
+    先给出可直接套用的公式，从而得出旋转后的圆心坐标：
+
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/13.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  
+    设 A 点旋转前的角度为 δ，则旋转（逆时针）到 C 点后的角度为(δ+β)
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/14.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  
+    设 A 点旋转前的角度为 δ，则旋转（逆时针）到 C 点后的角度为(δ+β)
+
+    由于 |AB| 与 |CB| 相等（即长度），且
+      |AB| = y/sin(δ) = x / cos(δ)
+      |CB| = d/sin(δ + β) = c / cos(δ + β)
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/14.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8,9,10
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  
+    设 A 点旋转前的角度为 δ，则旋转（逆时针）到 C 点后的角度为(δ+β)
+
+    由于 |AB| 与 |CB| 相等（即长度），且
+      |AB| = y/sin(δ) = x / cos(δ)
+      |CB| = d/sin(δ + β) = c / cos(δ + β)
+    
+    半径 r = x / cos(δ) = y / sin(δ) = d / sin(δ + β) = c / cos(δ + β)
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/14.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8,9,10,11,12,13,14
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  
+    设 A 点旋转前的角度为 δ，则旋转（逆时针）到 C 点后的角度为(δ+β)
+
+    由于 |AB| 与 |CB| 相等（即长度），且
+      |AB| = y/sin(δ) = x / cos(δ)
+      |CB| = d/sin(δ + β) = c / cos(δ + β)
+    
+    半径 r = x / cos(δ) = y / sin(δ) = d / sin(δ + β) = c / cos(δ + β)
+
+    由以下三角函数两角和差公式
+      sin(δ + β) = sin(δ)cos(β) + cos(δ)sin(β)
+      cos(δ + β) = cos(δ)cos(β) - sin(δ)sin(β)
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/14.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
+    x’ = cos(β) * (cx – centerX) – sin(β) * (cy – centerY) + centerX
+    y’ = sin(β) * (cx – centerX) + cos(β) * (cy – centerY) + centerY
+  
+    设 A 点旋转前的角度为 δ，则旋转（逆时针）到 C 点后的角度为(δ+β)
+
+    由于 |AB| 与 |CB| 相等（即长度），且
+      |AB| = y/sin(δ) = x / cos(δ)
+      |CB| = d/sin(δ + β) = c / cos(δ + β)
+    
+    半径 r = x / cos(δ) = y / sin(δ) = d / sin(δ + β) = c / cos(δ + β)
+
+    由以下三角函数两角和差公式
+      sin(δ + β) = sin(δ)cos(β) + cos(δ)sin(β)
+      cos(δ + β) = cos(δ)cos(β) - sin(δ)sin(β)
+    
+    可得出旋转后的坐标：
+      c = r * cos(δ + β) 
+        = r * cos(δ)cos(β) - r * sin(δ)sin(β) 
+        = x * cos(β) - y * sin(β)
+      d = r * sin(δ + β) 
+        = r * sin(δ)cos(β) + r * cos(δ)sin(β) 
+        = y * cos(β) + x * sin(β)
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/14.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+  ```js 
+    推箱子、踩地雷
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/15.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    地图格子划分
+
+    将地图（场景）划分为一个个格子。
+    地图中参与检测的对象都存储着自身所在格子的坐标
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/16.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    地图格子划分
+
+    // 通过特定标识指定（非）可行区域
+    map = [
+      [0, 0, 1, 1, 1, 0, 0, 0, 0],
+      [0, 1, 1, 0, 0, 1, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0, 0],
+      [0, 1, 0, 0, 0, 0, 1, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1, 0, 0]
+    ],
+    // 设定角色的初始位置
+    player = {left: 2, top: 2}
+    // 移动前（后）判断角色的下一步的动作
+    ...
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/16.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+  ```js 
+    像素检测
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/17.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    像素检测
+
+    以像素级别检测物体之间是否存在重叠，从而判断是否碰撞。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/17.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    像素检测
+
+    以像素级别检测物体之间是否存在重叠，从而判断是否碰撞。
+
+    在 Canvas 中的两种实现方式：
+
+    1. 通过将两个物体在 offscreen canvas 中
+    判断同一位置（坐标）下是否同时存在非透明的像素。
+
+    2. 利用 canvas 的 globalCompositeOperation = 'destination-in' 属性。
+    该属性会让两者的重叠部分会被保留，其余区域都变成透明。
+    因此，若存在非透明像素，则为碰撞。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/17.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    像素检测
+
+    以像素级别检测物体之间是否存在重叠，从而判断是否碰撞。
+
+    在 Canvas 中的两种实现方式：
+
+    1. 通过将两个物体在 offscreen canvas 中
+    判断同一位置（坐标）下是否同时存在非透明的像素。
+
+    2. 利用 canvas 的 globalCompositeOperation = 'destination-in' 属性。
+    该属性会让两者的重叠部分会被保留，其余区域都变成透明。
+    因此，若存在非透明像素，则为碰撞。
+
+    当待检测碰撞物体为两个时，
+    第一种方法需要两个 offscreen canvas，而第二种只需一个。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/17.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    像素检测
+
+    以像素级别检测物体之间是否存在重叠，从而判断是否碰撞。
+
+    在 Canvas 中的两种实现方式：
+
+    1. 通过将两个物体在 offscreen canvas 中
+    判断同一位置（坐标）下是否同时存在非透明的像素。
+
+    2. 利用 canvas 的 globalCompositeOperation = 'destination-in' 属性。
+    该属性会让两者的重叠部分会被保留，其余区域都变成透明。
+    因此，若存在非透明像素，则为碰撞。
+
+    当待检测碰撞物体为两个时，
+    第一种方法需要两个 offscreen canvas，而第二种只需一个。
+
+    这里并不是利用 offscreen render 的性能优势，
+    而是利用 offscreen canvas 保存独立物体的像素。
+    onscreen canvas 只是起展示作用，碰撞检测是在 offscreen canvas 中进行。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/18.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js 
+    像素检测
+
+    以像素级别检测物体之间是否存在重叠，从而判断是否碰撞。
+
+    在 Canvas 中的两种实现方式：
+
+    1. 通过将两个物体在 offscreen canvas 中
+    判断同一位置（坐标）下是否同时存在非透明的像素。
+
+    2. 利用 canvas 的 globalCompositeOperation = 'destination-in' 属性。
+    该属性会让两者的重叠部分会被保留，其余区域都变成透明。
+    因此，若存在非透明像素，则为碰撞。
+
+    当待检测碰撞物体为两个时，
+    第一种方法需要两个 offscreen canvas，而第二种只需一个。
+
+    这里并不是利用 offscreen render 的性能优势，
+    而是利用 offscreen canvas 保存独立物体的像素。
+    onscreen canvas 只是起展示作用，碰撞检测是在 offscreen canvas 中进行。
+
+    另外，由于需要逐像素检测，若对整个 Canvas 内所有像素都进行此操作，
+    无疑会浪费很多资源。
+    因此，我们可以先通过运算得到两者相交区域，
+    然后只对该区域内的像素进行检测即可。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/18.png" width="700px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns>
+
+<Step>
+
+ ```js 
+                              凸多边形碰撞
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/31.png" width="500px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                              凸多边形碰撞
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/32.png" width="500px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                                分离轴定理
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/19.png" width="500px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                                分离轴定理
+
+    通过判断任意两个 凸多边形 在任意角度下的投影是否均存在重叠，来判断是否发生碰撞。
+    若在某一角度光源下，两物体的投影存在间隙，则为不碰撞，否则为发生碰撞。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/19.png" width="500px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                                分离轴定理
+
+    通过判断任意两个 凸多边形 在任意角度下的投影是否均存在重叠，来判断是否发生碰撞。
+    若在某一角度光源下，两物体的投影存在间隙，则为不碰撞，否则为发生碰撞。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/20.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                                分离轴定理
+
+    通过判断任意两个 凸多边形 在任意角度下的投影是否均存在重叠，来判断是否发生碰撞。
+    若在某一角度光源下，两物体的投影存在间隙，则为不碰撞，否则为发生碰撞。
+
+    在程序中，遍历所有360度是不现实的。那如何确定 投影轴 呢？
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/20.png" width="700px"/>
+  </>
+
+</Step>
+
+<Step>
+
+ ```js 
+                                分离轴定理
+
+    通过判断任意两个 凸多边形 在任意角度下的投影是否均存在重叠，来判断是否发生碰撞。
+    若在某一角度光源下，两物体的投影存在间隙，则为不碰撞，否则为发生碰撞。
+
+    在程序中，遍历所有360度是不现实的。那如何确定 投影轴 呢？
+    
+    其实投影轴的数量与多边形的边数相等即可。
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/21.png" width="900px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                        特殊情况
+
+    我们只需要一条投影轴，这条轴就是圆心与多边形顶点中最近的一点的连线
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/25.png" width="600px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+                碰撞性能优化
+
+    如果速度特别快，来不及碰撞呢，就穿模了
+    就需要最小平移量和 把碰撞分为两个阶段粗略和详细了
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/26.png" width="600px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+       对于凹多边形，        
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/33.png" width="600px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+       对于凹多边形，
+       两个多边形没有碰撞，但找不到这样一条直线，能将两者分开。        
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/33.png" width="600px"/>
+  </>
+
+</Step>
+
+<Step>
+
+  ```js
+       对于凹多边形，
+       两个多边形没有碰撞，但找不到这样一条直线，能将两者分开。
+       所以如果是凹多边形的话，需要先将其转换成多个凸多边形。         
+  ```
+  
+  <>
+    <img src="http://82.156.167.84:7001/blog/ppt2/33.png" width="600px"/>
+  </>
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+# 圆的碰撞 💥
 
 ---
 
